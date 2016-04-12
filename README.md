@@ -1,2 +1,2 @@
 # Sopwidth
-Assignment
+Assignment for Group Project
