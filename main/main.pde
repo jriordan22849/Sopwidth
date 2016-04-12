@@ -57,18 +57,23 @@ boolean mw = false;
 int start;
 int x, y;
 int baseX,baseY;
-int lifes = 3;
+int lifes = 1000;
+int player2Lifes = 1000;
 int score = 0;
+int player2Scroe = 0;
 int numOfBases = 6;
 int numOfPlanes = 10;
 int numOfBombs = 3;
+int player2numOfBombs = 3;
 
 float fuel = 100;
+float player2fuel = 100;
 
  ArrayList<GameObjects> objects = new ArrayList<GameObjects>();
  ArrayList<Bullet> bullets = new ArrayList<Bullet>();
  ArrayList<Bomb> bombs = new ArrayList<Bomb>();
  ArrayList<Player> players = new ArrayList<Player>();
+ ArrayList<Player2> players2 = new ArrayList<Player2>();
  ArrayList<Background> back = new ArrayList<Background>();
  ArrayList<EnemyPlane> planes = new ArrayList<EnemyPlane>();
  ArrayList<EnemyBases> bases = new ArrayList<EnemyBases>();
@@ -471,12 +476,15 @@ void draw() {
  }
  
  if(mulltiplayer) {
-     Player playerNumber2 = new Player(400,300);
-     objects.add(playerNumber2);
-     players.add(playerNumber2);
-     multip = false;
-     mulltiplayer = !mulltiplayer;
-   
+     
+     for( int i = 0 ; i<1; i++)
+     {
+       Player2 player2 = new Player2(200,300);
+       objects.add(player2);
+       players2.add(player2);
+    }
+     multip = true;   
+     mulltiplayer = false;
  }
  
 
@@ -554,6 +562,7 @@ void backButton() {
         if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
         {  
           lifes = 3;
+          fuel = 100;
           numOfBombs = 3;
           playScreen = false;
           endScreen = false;
@@ -563,7 +572,7 @@ void backButton() {
           player2ww2 = false;
           player2sw = false;
           player2mw = false;
-          
+          mulltiplayer = false;
           
        
           optionMenu = true;

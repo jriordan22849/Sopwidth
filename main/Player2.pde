@@ -1,14 +1,14 @@
-class Player extends GameObjects
+class Player2 extends GameObjects
 {
   float buletCounter;
   boolean alive = true;
    float duel;
   float maxduel =100;
   
-  Player() {
+  Player2() {
   }
 
-  Player(float x ,float y)
+  Player2(float x ,float y)
   {
     position.x = x;// position of the player
     position.y = y;
@@ -62,7 +62,7 @@ class Player extends GameObjects
         if(position.y > 560) {
           position.x = 200;
           position.y = 300;
-          lifes--;
+          player2Lifes--;
         }
         
       forward.x = 5;
@@ -73,30 +73,30 @@ class Player extends GameObjects
       if(keyPressed)
       {
         if(fuelTank) {
-          if(fuel <= 0) {
+          if(player2fuel <= 0) {
             fuelTank = !fuelTank;
           }
           
         
         switch(key)
         {
-          case 'd':
+          case 'l':
           position.add(forward);//players go right
-          fuel -= .1;
+          player2fuel -= .1;
            break;
-          case 'a':
+          case 'j':
           position.sub(forward);
-          fuel -= .1;
+          player2fuel -= .1;
            break;
-          case 'w':
+          case 'i':
           position.sub(down2);
-          fuel -= .1;
+          player2fuel -= .1;
            break;
-          case 's':
+          case 'm':
           position.add(down);
-          fuel -= .1;
+          player2fuel -= .1;
            break;
-            case ' ':
+            case 'n':
             if(alive == true)// creating a bullet
             { 
               Bullet bullet = new Bullet();
@@ -128,7 +128,7 @@ class Player extends GameObjects
                 alive =false;
                 buletCounter = 0;
                 bombFire = false;
-                numOfBombs --;
+                player2numOfBombs --;
               }
             }
            if(alive == false)//fire rate
