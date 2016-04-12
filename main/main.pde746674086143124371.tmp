@@ -1,0 +1,133 @@
+MainMenu main = new MainMenu();
+Option option = new Option();
+Single single = new Single();
+Multi multi = new Multi();
+Controls controls = new Controls();
+Instructions instructions = new Instructions();
+PlayingScreen playing = new PlayingScreen();
+
+PImage bg, bg2, bg3, oldPlane, modernPlane, tFighter, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
+multiplayerButton, multiplayerButton2, exitGameButton, exitGameButton2, howToPlayButton, howToPlayButton2, backButton, backButton2;
+
+// screen booleans
+boolean singlplayer = false;
+boolean multiplayer = false;
+boolean howToPlay = false;
+boolean mainMenu = true;
+boolean optionMenu = false;
+boolean playScreen = false;
+boolean exit = false;
+
+boolean screenShift = false;
+
+
+// plane options for players.
+boolean oldPlaneBoolean = false;
+boolean modernPlaneBoolean = false;
+boolean tFighterBoolean = false;
+
+int start;
+
+void setup() {
+  size(800, 600); 
+  start = millis();
+  
+  // set image variables
+  bg = loadImage("images/Background1.png");
+  bg2 = loadImage("images/Background2.png");
+  bg3 = loadImage("images/Background3.png");
+  oldPlane = loadImage("images/oldplane.png");
+  modernPlane = loadImage("images/modernplane.png");
+  tFighter = loadImage("images/tFighter.png");
+  playGameButton = loadImage("images/PlayGameButton.png");
+  playGameButton2 = loadImage("images/PlayGameButton2.png");
+  singlePlayerButton = loadImage("images/SinglePlayerButton.png");
+  singlePlayerButton2 = loadImage("images/SinglePlayerButton2.png");
+  multiplayerButton = loadImage("images/MultiplayerButton.png");
+  multiplayerButton2 = loadImage("images/MultiplayerButton2.png");
+  exitGameButton = loadImage("images/ExitGameButton.png");
+  exitGameButton2 = loadImage("images/ExitGameButton2.png");
+  howToPlayButton = loadImage("images/HowToPlayButton.png");
+  howToPlayButton2 = loadImage("images/HowToPlayButton2.png");
+  backButton = loadImage("images/BackButton.png");
+  backButton2 = loadImage("images/BackButton2.png");
+}
+
+void draw() {
+  
+  background(0);
+
+  // Main menu screen
+  if( mainMenu== true) {
+    main.display();  
+    screenShift = false;
+  }
+  
+  if(optionMenu == true) {
+    option.display();
+  }
+  
+  if(singlplayer == true) {
+    single.display();
+    controls.control();
+  }
+  
+  if(multiplayer == true) {
+    multi.display();
+  }
+  
+  if(howToPlay == true) {
+    instructions.display();
+  }
+    
+  if(exit == true) {
+   exit(); 
+  }
+  
+  if(playScreen) {
+    playing.display();
+  }
+  
+}
+
+// Back button in the menu
+void backButton() {
+  
+  if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
+  {  
+    image(backButton2, 10, 520);
+  }
+  
+    if(mousePressed)
+    {
+      // Choose plane screen
+      if(singlplayer) {
+        if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
+        {  
+          singlplayer = false;
+          optionMenu = true;
+        
+        }
+      }
+      
+      // how to play screen
+      if(howToPlay) {
+        if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
+        {  
+          howToPlay = false;
+          optionMenu = true;
+        
+        }
+      }
+      
+     // Choose plane screen
+      if(multiplayer) {
+        if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
+        {  
+          multiplayer = false;
+          optionMenu = true;
+        
+        }
+      }
+  }
+}
