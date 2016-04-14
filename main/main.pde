@@ -508,6 +508,51 @@ void draw() {
   image(bombSymbol, 80, 20);
   text("X" + numOfBombs,105,33);
   
+  if(multip) {
+    
+   // hit detection for ammo 
+   for(int i = 0 ; i < players2.size()  ; i ++)//hit detection
+  {
+    Player2 player = players2.get(i);
+    for (int j = 0; j < ammo.size() ; j ++)
+    {
+      Ammo ammolevel = ammo.get(j);
+      if (dist(player.position.x+50,player.position.y + 18 ,ammolevel.position.x + 25 ,ammolevel.position.y + 35) <= 40)
+      {
+        player2numOfBombs += 1 ;
+        ammolevel.touched();
+      } 
+    }
+  }
+  
+  // hit detection for fuel
+  for(int i = 0 ; i < players2.size()  ; i ++)//hit detection
+  {
+    Player2 player = players2.get(i);
+    for (int j = 0; j < fuels.size() ; j ++)
+    {
+      Fuel health = fuels.get(j);
+      if (dist(player.position.x+50,player.position.y + 18 ,health.position.x + 12,health.position.y + 22) <= 40)
+      {
+        player2fuel = 100 ;
+        health.touched();
+      } 
+    }
+  }
+    // number of lives
+    textSize(15);
+    fill(255,0,0);
+    stroke(255,0,0);
+
+    image(life,230,20);
+    text("X" + player2Lifes,253,33);
+    text("Score: " + player2Scroe,230,53);
+  
+    // number of bombs
+    image(bombSymbol, 280, 20);
+    text("X" + player2numOfBombs,305,33);
+  }
+  
  // text("Fuel:" + (int)fuel +"%",150,33);
   }
   

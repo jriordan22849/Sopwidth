@@ -33,7 +33,7 @@ class Player2 extends GameObjects
   {  
      pushMatrix();
      float healthPercentage;
-     healthPercentage = fuel/maxduel*100;
+     healthPercentage = player2fuel/maxduel*100;
      fill(100,100);
      rect(position.x + 35,position.y +5,30,5);
      fill(2.55*100-healthPercentage-2.55,255*healthPercentage/100,0);
@@ -76,28 +76,28 @@ class Player2 extends GameObjects
         if(position.y > 560) {
           position.x = 200;
           position.y = 300;
-          lifes--;
+          player2Lifes--;
         }
       if (checkKey(up))
       {     
           position.sub(down2);
-          fuel -= .1;
+          player2fuel -= .1;
       }      
       if (checkKey(dow))
       {
           position.add(down);
-          fuel -= .1;
+          player2fuel -= .1;
       }    
       
       if (checkKey(right))
       {
           position.add(forward);//players go right
-          fuel -= .1;
+          player2fuel -= .1;
       }
       if (checkKey(left))
       {
           position.sub(forward);
-          fuel -= .1; 
+          player2fuel -= .1; 
       }
       if (checkKey(fire))
       {
