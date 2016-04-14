@@ -2,8 +2,16 @@ class Player2 extends GameObjects
 {
   float buletCounter;
   boolean alive = true;
-   float duel;
+  float duel;
   float maxduel =100;
+
+   
+  char up;
+  char dow;
+  char left;
+  char right;
+  char fire;
+  char bob;
   
   Player2() {
   }
@@ -13,6 +21,12 @@ class Player2 extends GameObjects
     position.x = x;// position of the player
     position.y = y;
     theta = 0;
+    up = 'i';
+    left = 'j';
+    right = 'l';
+    dow = 'k';
+    fire = '/';
+    bob = '.';
    }
 
   void display()
@@ -28,15 +42,15 @@ class Player2 extends GameObjects
      if(ww2 == true)
      {
        rect(20,20,10,10);
-       image(oldPlaneSmall, 20, 20);
+       image(oldplanebluesmall, 20, 20);
      }
      if(sw == true)
      {
-       image(spaceShipSmall, 20, 20);
+       image(SpaceShipSmallBlue, 20, 20);
      }
      if(mw == true)
      {
-       image(modernPlaneSmall,20, 20);
+       image(modernplanesmallblue,20, 20);
      }
      
 
@@ -62,42 +76,32 @@ class Player2 extends GameObjects
         if(position.y > 560) {
           position.x = 200;
           position.y = 300;
-          player2Lifes--;
+          lifes--;
         }
-        
-      forward.x = 5;
-      down.y = 5;
-      down2.y = 7;
-      velocity.y = 2;
-      position.add(velocity); 
-      if(keyPressed)
-      {
-        if(fuelTank) {
-          if(player2fuel <= 0) {
-            fuelTank = !fuelTank;
-          }
-          
-        
-        switch(key)
-        {
-          case 'l':
-          position.add(forward);//players go right
-          player2fuel -= .1;
-           break;
-          case 'j':
-          position.sub(forward);
-          player2fuel -= .1;
-           break;
-          case 'i':
+      if (checkKey(up))
+      {     
           position.sub(down2);
-          player2fuel -= .1;
-           break;
-          case 'm':
+          fuel -= .1;
+      }      
+      if (checkKey(dow))
+      {
           position.add(down);
-          player2fuel -= .1;
-           break;
-            case 'n':
-            if(alive == true)// creating a bullet
+          fuel -= .1;
+      }    
+      
+      if (checkKey(right))
+      {
+          position.add(forward);//players go right
+          fuel -= .1;
+      }
+      if (checkKey(left))
+      {
+          position.sub(forward);
+          fuel -= .1; 
+      }
+      if (checkKey(fire))
+      {
+         if(alive == true)// creating a bullet
             { 
               Bullet bullet = new Bullet();
               bullet.position = position.get(); //we getting the player position and set the bullet posiotion the same   
@@ -115,34 +119,41 @@ class Player2 extends GameObjects
                 alive = true;
               }
             }
-            break;
-            case 'b':
-            if(numOfBombs > 0) {
-              if(alive == true)// creating a bullet
-              { 
-                Bomb bomb = new Bomb();
-                bomb.position = position.get(); //we getting the player position and set the bullet posiotion the same   
-                bomb.theta = 2;
-                objects.add(bomb);
-                bombs.add(bomb);
-                alive =false;
-                buletCounter = 0;
-                bombFire = false;
-                player2numOfBombs --;
-              }
-            }
-           if(alive == false)//fire rate
-            {
-              buletCounter ++;
-              if(buletCounter == 10 )
-              {
-                alive = true;
-              }
-            }
-            break;
-        }
-        }
       }
+      
+      if (checkKey(bob))
+      {
+        if(numOfBombs > 0) {
+             if(alive == true)// creating a bullet
+             { 
+               Bomb bomb = new Bomb();
+               bomb.position = position.get(); //we getting the player position and set the bullet posiotion the same   
+               bomb.theta = 2;
+               objects.add(bomb);
+               bombs.add(bomb);
+               alive =false;
+               buletCounter = 0;
+               bombFire = false;
+               numOfBombs --;
+             }
+           }
+           if(alive == false)//fire rate
+           {
+             buletCounter ++;
+             if(buletCounter == 10 )
+             {
+               alive = true;
+             }
+           }
+     
+      }
+        
+      forward.x = 5;
+      down.y = 5;
+      down2.y = 7;
+      velocity.y = 2;
+      position.add(velocity); 
+      
     }
     
   void explosion()//when bullet hits the zombie it creates mini explosion
@@ -160,21 +171,7 @@ class Player2 extends GameObjects
     ellipse(20,50,20,20);
 
   }
-    
-    void keyPressed() {
-        if (key == CODED) {
-          if (keyCode == UP) {
-            position.sub(down); 
-          } else if (keyCode == DOWN) {
-            position.add(down);
-            
-          } else if (keyCode == LEFT) {
-             position.sub(forward);
-            
-          } else if (keyCode == RIGHT) {
-            position.add(forward);//players go right
-            
-          }
-        } 
-    }
+  
+
+
 }

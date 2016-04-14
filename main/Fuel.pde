@@ -4,7 +4,7 @@ class Fuel extends GameObjects
   Fuel() 
   {
     position.y = (random(-500,-50));  //spawn points of the health
-    position.x = (random(50,750)); 
+    position.x = (random(50,650)); 
   }
   void move()//movment of the bullet
   { 

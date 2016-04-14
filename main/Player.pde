@@ -2,8 +2,16 @@ class Player extends GameObjects
 {
   float buletCounter;
   boolean alive = true;
-   float duel;
+  float duel;
   float maxduel =100;
+
+   
+  char up;
+  char dow;
+  char left;
+  char right;
+  char fire;
+  char bob;
   
   Player() {
   }
@@ -13,6 +21,12 @@ class Player extends GameObjects
     position.x = x;// position of the player
     position.y = y;
     theta = 0;
+    up = 'w';
+    left = 'a';
+    right = 'd';
+    dow = 's';
+    fire = ' ';
+    bob = 'b';
    }
 
   void display()
@@ -64,40 +78,30 @@ class Player extends GameObjects
           position.y = 300;
           lifes--;
         }
-        
-      forward.x = 5;
-      down.y = 5;
-      down2.y = 7;
-      velocity.y = 2;
-      position.add(velocity); 
-      if(keyPressed)
-      {
-        if(fuelTank) {
-          if(fuel <= 0) {
-            fuelTank = !fuelTank;
-          }
-          
-        
-        switch(key)
-        {
-          case 'd':
-          position.add(forward);//players go right
-          fuel -= .1;
-           break;
-          case 'a':
-          position.sub(forward);
-          fuel -= .1;
-           break;
-          case 'w':
+      if (checkKey(up))
+      {     
           position.sub(down2);
           fuel -= .1;
-           break;
-          case 's':
+      }      
+      if (checkKey(dow))
+      {
           position.add(down);
           fuel -= .1;
-           break;
-            case ' ':
-            if(alive == true)// creating a bullet
+      }    
+      
+      if (checkKey(right))
+      {
+          position.add(forward);//players go right
+          fuel -= .1;
+      }
+      if (checkKey(left))
+      {
+          position.sub(forward);
+          fuel -= .1; 
+      }
+      if (checkKey(fire))
+      {
+         if(alive == true)// creating a bullet
             { 
               Bullet bullet = new Bullet();
               bullet.position = position.get(); //we getting the player position and set the bullet posiotion the same   
@@ -115,34 +119,41 @@ class Player extends GameObjects
                 alive = true;
               }
             }
-            break;
-            case 'b':
-            if(numOfBombs > 0) {
-              if(alive == true)// creating a bullet
-              { 
-                Bomb bomb = new Bomb();
-                bomb.position = position.get(); //we getting the player position and set the bullet posiotion the same   
-                bomb.theta = 2;
-                objects.add(bomb);
-                bombs.add(bomb);
-                alive =false;
-                buletCounter = 0;
-                bombFire = false;
-                numOfBombs --;
-              }
-            }
-           if(alive == false)//fire rate
-            {
-              buletCounter ++;
-              if(buletCounter == 10 )
-              {
-                alive = true;
-              }
-            }
-            break;
-        }
-        }
       }
+      
+      if (checkKey(bob))
+      {
+        if(numOfBombs > 0) {
+             if(alive == true)// creating a bullet
+             { 
+               Bomb bomb = new Bomb();
+               bomb.position = position.get(); //we getting the player position and set the bullet posiotion the same   
+               bomb.theta = 2;
+               objects.add(bomb);
+               bombs.add(bomb);
+               alive =false;
+               buletCounter = 0;
+               bombFire = false;
+               numOfBombs --;
+             }
+           }
+           if(alive == false)//fire rate
+           {
+             buletCounter ++;
+             if(buletCounter == 10 )
+             {
+               alive = true;
+             }
+           }
+     
+      }
+        
+      forward.x = 5;
+      down.y = 5;
+      down2.y = 7;
+      velocity.y = 2;
+      position.add(velocity); 
+      
     }
     
   void explosion()//when bullet hits the zombie it creates mini explosion
@@ -160,21 +171,7 @@ class Player extends GameObjects
     ellipse(20,50,20,20);
 
   }
-    
-    void keyPressed() {
-        if (key == CODED) {
-          if (keyCode == UP) {
-            position.sub(down); 
-          } else if (keyCode == DOWN) {
-            position.add(down);
-            
-          } else if (keyCode == LEFT) {
-             position.sub(forward);
-            
-          } else if (keyCode == RIGHT) {
-            position.add(forward);//players go right
-            
-          }
-        } 
-    }
+  
+
+
 }

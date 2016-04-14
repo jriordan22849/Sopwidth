@@ -5,7 +5,6 @@ Multi multi = new Multi();
 Controls controls = new Controls();
 Instructions instructions = new Instructions();
 PlayingScreen playing = new PlayingScreen();
-Player player  = new Player();
 Gameover gOver = new Gameover();
 
 PImage bg, bg2, bg3, oldPlane, oldPlaneSmall, modernPlane, modernPlaneSmall, spaceShip, spaceShipSmall, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
@@ -79,6 +78,8 @@ float player2fuel = 100;
  ArrayList<EnemyBases> bases = new ArrayList<EnemyBases>();
  ArrayList<Fuel> fuels = new ArrayList<Fuel>();
  ArrayList<Ammo> ammo = new ArrayList<Ammo>();
+ 
+ static boolean[] keys = new boolean[526];
  
 
 void setup() {
@@ -438,9 +439,9 @@ void draw() {
     for (int j = 0; j < fuels.size() ; j ++)
     {
       Ammo ammolevel = ammo.get(j);
-      if (dist(player.position.x+50,player.position.y + 18 ,ammolevel.position.x + 12,ammolevel.position.y + 22) <= 40)
+      if (dist(player.position.x+50,player.position.y + 18 ,ammolevel.position.x + 25 ,ammolevel.position.y + 35) <= 40)
       {
-        numOfBombs ++;
+        numOfBombs += 1 ;
         ammolevel.touched();
       } 
     }
@@ -580,4 +581,23 @@ void backButton() {
         }
       }
   }
+}
+
+static boolean checkKey(int k)
+{
+  if (keys.length >= k) 
+  {
+    return keys[k] || keys[Character.toUpperCase(k)];  
+  }
+  return false;
+}
+
+void keyPressed()
+{ 
+  keys[keyCode] = true;
+}
+ 
+void keyReleased()
+{
+  keys[keyCode] = false; 
 }

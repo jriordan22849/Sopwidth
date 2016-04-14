@@ -19,7 +19,7 @@ class Ammo extends GameObjects
         alive = false;
         touched();
         position.y = (random(-500,-50));  
-        position.x = (random(20,700));
+        position.x = (random(20,650));
       }
   }
   void touched()// when bullet touches the zombie we remove it and set the possition out of the screen as sometimes one bullet could kill 2 zombies
