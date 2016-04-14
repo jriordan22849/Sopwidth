@@ -374,8 +374,8 @@ void draw() {
    // println(bullet.position.x);
     for (int j = 0; j < planes.size() ; j ++)
     {
-      EnemyPlane zombie1 = planes.get(j);
-      if (dist(bullet.position.x,bullet.position.y,zombie1.x,zombie1.y) <=20)
+      EnemyPlane enemy1 = planes.get(j);
+      if (dist(bullet.position.x ,bullet.position.y,enemy1.x -20 ,enemy1.y -10 ) <=15)
       {
         bullet.explosion();
         bullet.touched();
@@ -436,7 +436,7 @@ void draw() {
    for(int i = 0 ; i < players.size()  ; i ++)//hit detection
   {
     Player player = players.get(i);
-    for (int j = 0; j < fuels.size() ; j ++)
+    for (int j = 0; j < ammo.size() ; j ++)
     {
       Ammo ammolevel = ammo.get(j);
       if (dist(player.position.x+50,player.position.y + 18 ,ammolevel.position.x + 25 ,ammolevel.position.y + 35) <= 40)

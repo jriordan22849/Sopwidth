@@ -1,6 +1,7 @@
 class Bullet extends GameObjects
 {
-
+  
+ 
   Bullet() 
   {
     speed = 20;//speed of the bullet
@@ -35,16 +36,26 @@ class Bullet extends GameObjects
     pushMatrix();
     noStroke();
     translate(position.x + 100,position.y);
-    fill(255,0,0);
-    ellipse(45,55,15, 5);
+    image(ww2bullet,0,30);
     popMatrix();
   }
   
   void explosion()//when bullet hits the zombie it creates mini explosion
   {
+  
 
     pushMatrix();
-    translate(position.x,position.y);
+    translate(position.x +15,position.y -35);
+    fill(255,255,0);
+    ellipse(20,50,100,100);
+    fill(255,0,0);
+    ellipse(20,50,90,90);
+    fill(255,255,0);
+    ellipse(20,50,80,80);
+    fill(255,0,0);
+    ellipse(20,50,70,70);
+    fill(255,255,0);
+    ellipse(20,50,60,60);
     fill(255,0,0);
     ellipse(20,50,50,50);
     fill(255,255,0);

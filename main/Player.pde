@@ -65,9 +65,9 @@ class Player extends GameObjects
         {
           position.x = 1;
         }
-        if(position.x > 571)
+        if(position.x > 701)
         {
-          position.x =570;
+          position.x =700;
         }
         
         if(position.y < 0) {
@@ -114,7 +114,7 @@ class Player extends GameObjects
            if(alive == false)//fire rate
             {
               buletCounter ++;
-              if(buletCounter == 10 )
+              if(buletCounter == 20 )
               {
                 alive = true;
               }
@@ -160,7 +160,17 @@ class Player extends GameObjects
   {
 
 
-    translate(x + 20,y);
+    translate(position.x + 20,position.y);
+    fill(255,255,0);
+    ellipse(20,50,100,100);
+    fill(255,0,0);
+    ellipse(20,50,90,90);
+    fill(255,255,0);
+    ellipse(20,50,80,80);
+    fill(255,0,0);
+    ellipse(20,50,70,70);
+    fill(255,255,0);
+    ellipse(20,50,60,60);
     fill(255,0,0);
     ellipse(20,50,50,50);
     fill(255,255,0);
