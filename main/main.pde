@@ -56,8 +56,8 @@ boolean mw = false;
 int start;
 int x, y;
 int baseX,baseY;
-int lifes = 1000;
-int player2Lifes = 1000;
+int lifes = 2;
+int player2Lifes = 2;
 int score = 0;
 int player2Scroe = 0;
 int numOfBases = 6;
@@ -81,9 +81,14 @@ float player2fuel = 100;
  
  static boolean[] keys = new boolean[526];
  
+ // Files
+ int data[];
+ 
 
 void setup() {
   size(800, 600); 
+  String[] stuff = loadStrings("data.txt");
+  data = int(split(stuff[0],','));
   start = millis();
   
   // set image variables
@@ -607,9 +612,14 @@ void backButton() {
       if(endScreen) {
         if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
         {  
+          score = 0;
+          player2Scroe = 0;
           lifes = 3;
+          player2Lifes = 3;
           fuel = 100;
+          player2fuel = 100;
           numOfBombs = 3;
+          player2numOfBombs = 3;
           playScreen = false;
           endScreen = false;
           ww2 = false;
