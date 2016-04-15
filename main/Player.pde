@@ -54,9 +54,6 @@ class Player extends GameObjects
      {
        image(modernPlaneSmall,20, 20);
      }
-     
-
-     
      popMatrix();
    }
    
@@ -169,7 +166,7 @@ class Player extends GameObjects
       forward.x = 5;
       down.y = 5;
       down2.y = 7;
-      velocity.y = 2;
+      velocity.y = 0;
       position.add(velocity); 
       
     }

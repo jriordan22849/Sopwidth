@@ -36,7 +36,18 @@ class Bullet extends GameObjects
     pushMatrix();
     noStroke();
     translate(position.x + 100,position.y);
-    image(ww2bullet,0,30);
+     if(ww2 == true)
+     {
+       image(ww2bullet,0,30);
+     }
+     if(sw == true)
+     {
+       image(swbullet, 10, 30);
+     }
+     if(mw == true)
+     {
+       image(ww2bullet,20, 20);
+     }
     popMatrix();
   }
   

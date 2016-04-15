@@ -33,8 +33,19 @@ class Ammo extends GameObjects
   {
      pushMatrix();
      translate(position.x,position.y);
-     rect(20,20,10,10);
-     image(bombIcon, 20, 20);
+     if(ww2 == true)
+     {
+       rect(20,20,10,10);
+       image(bombIcon, 20, 20);
+     }
+     if(sw == true)
+     {
+       image(swcrate, 20, 0);
+     }
+     if(mw == true)
+     {
+       image(moderncrate,20, 20);
+     }
      popMatrix(); 
   }
   

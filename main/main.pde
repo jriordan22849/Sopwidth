@@ -12,7 +12,7 @@ multiplayerButton, multiplayerButton2, exitGameButton, exitGameButton2, howToPla
 backButton, backButton2, tfighter, mPlane, oPlane, instructions4, life, walker, bombSymbol, SpaceShipSmallBlue, SpaceShipBlue, instructions5, oldplaneBlue, oldplanebluesmall, 
 modernplanesmallblue, modernplaneblue , 
 modernplane2, gasoline,goButton,goButton2, bombIcon,oldtank , 
-moderntank ,ww2bullet, score1, leaderboard1;
+moderntank ,ww2bullet, score1, leaderboard1, moderncrate , swcrate, swbullet;
 
 PFont font;
 
@@ -155,7 +155,9 @@ void setup() {
   oldtank = loadImage("images/oldtank.png");
   moderntank = loadImage("images/moderntank.png");
   ww2bullet  = loadImage("images/ww2bullet.png"); 
-  
+  moderncrate  = loadImage("images/moderncrate.png"); 
+  swcrate  = loadImage("images/swcrate.png"); 
+  swbullet = loadImage("images/swbullet.png");
    
    for( int i = 0 ; i<1; i++)
    {
