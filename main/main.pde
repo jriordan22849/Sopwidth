@@ -13,7 +13,7 @@ backButton, backButton2, tfighter, mPlane, oPlane, instructions4, life, walker, 
 modernplanesmallblue, modernplaneblue , 
 modernplane2, gasoline,goButton,goButton2, bombIcon,oldtank , 
 moderntank ,ww2bullet, score1, leaderboard1, p1Score, p2Score, p1Wins, p2Wins, draw ,moderncrate , swcrate, swbullet,
-swbomb,wwbomb;
+swbomb,wwbomb, modernbomb;
 
 
 PFont font;
@@ -161,8 +161,9 @@ void setup() {
   moderncrate  = loadImage("images/moderncrate.png"); 
   swcrate  = loadImage("images/swcrate.png"); 
   swbullet = loadImage("images/swbullet.png");
-  swbomb = loadImage("images/swbullet.png");
-  wwbomb =loadImage("images/ww2bomb.png");
+  swbomb = loadImage("images/StarWarsBomb.png");
+  wwbomb = loadImage("images/ww2bomb1.png");
+  modernbomb = loadImage("images/ModernBomb.png");
 
   
   p1Score = loadImage("images/P1Score.png");
@@ -420,7 +421,7 @@ void draw() {
      Bomb bomb = bombs.get(i);
      for(int j = 0 ; j < bases.size(); j ++) {
        EnemyBases eBase = bases.get(j);
-       if(dist(bomb.position.x + 25, bomb.position.y +59, eBase.x,eBase.y + 100)  <= 100) {
+       if(dist(bomb.position.x + 15, bomb.position.y +20, eBase.x  ,eBase.y+50  )  <= 75) {
          eBase.explosion(eBase.x,eBase.y);
          bomb.explosion();
          bomb.touched();
@@ -431,21 +432,6 @@ void draw() {
          EnemyBases base = new EnemyBases(baseX,baseY);
          bases.add(base);
         
-         score += 2;
-       }
-   
-       if(dist(bomb.position.x, bomb.position.y,eBase.x - 50,eBase.y + 100) <= 100) {
-         eBase.explosion(eBase.x,eBase.y);
-         bomb.explosion();
-         bomb.touched();
-         bases.remove(j);
-         
-         baseX = (int)random(width, width + 500);
-         baseY = 480;
-         EnemyBases base = new EnemyBases(baseX,baseY);
-         bases.add(base);
-         
-
          score += 2;
        }
      }

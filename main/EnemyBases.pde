@@ -23,7 +23,17 @@ class EnemyBases {
   {
 
 
-    translate(x + 20,y);
+    translate(x + 40,y);
+    fill(255,255,0);
+    ellipse(20,50,100,100);
+    fill(255,0,0);
+    ellipse(20,50,90,90);
+    fill(255,255,0);
+    ellipse(20,50,80,80);
+    fill(255,0,0);
+    ellipse(20,50,70,70);
+    fill(255,255,0);
+    ellipse(20,50,60,60);
     fill(255,0,0);
     ellipse(20,50,50,50);
     fill(255,255,0);

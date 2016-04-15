@@ -46,7 +46,7 @@ class Bullet extends GameObjects
      }
      if(mw == true)
      {
-       image(ww2bullet,20, 20);
+       image(ww2bullet,0, 30);
      }
     popMatrix();
   }

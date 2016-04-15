@@ -41,11 +41,11 @@ class Bomb extends GameObjects
      }
      if(sw == true)
      {
-       image(swbullet, 10, 30);
+       image(swbomb, 0, 30);
      }
      if(mw == true)
      {
-       image(ww2bullet,20, 20);
+       image(modernbomb,0,30);
      }
     popMatrix();
   }
@@ -54,7 +54,17 @@ class Bomb extends GameObjects
   {
 
     pushMatrix();
-    translate(position.x,position.y);
+    translate(position.x +40,position.y);
+    fill(255,255,0);
+    ellipse(20,50,100,100);
+    fill(255,0,0);
+    ellipse(20,50,90,90);
+    fill(255,255,0);
+    ellipse(20,50,80,80);
+    fill(255,0,0);
+    ellipse(20,50,70,70);
+    fill(255,255,0);
+    ellipse(20,50,60,60);
     fill(255,0,0);
     ellipse(20,50,50,50);
     fill(255,255,0);
