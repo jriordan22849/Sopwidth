@@ -1,4 +1,5 @@
 class Gameover {
+  String[] scoreArrayMulti = new String[1];
    Gameover() {
    }
    
@@ -16,6 +17,10 @@ class Gameover {
       //textSize(50);
       //PFont font;
       //font = createFont("ARDESTINE.ttf", 63);
+      
+      // reload single player leaderboard incase it updated
+      String[] stuff = loadStrings("data.txt");
+      data = int(split(stuff[0],','));
       textFont(font);
       text(score,548,310);
       text(data[0],548,392);
@@ -30,6 +35,10 @@ class Gameover {
           saveStrings("data.txt", scoreArray);
       }
      } else { 
+       
+       // reload multiplayer file incase it updated 
+       String[] multiFile = loadStrings("multiFile.txt");
+       multiData = int(split(multiFile[0],','));
        background(bg5);
        
        image(p1Score, 162, 290);
@@ -41,18 +50,35 @@ class Gameover {
       
        textFont(font);
        
+       // if statements to display who won.
        if(score > player2Scroe){
          image(p1Wins, 200, 220);
+         
+         if(score > multiData[0]) {
+           for(int i = 0; i < scoreArrayMulti.length; i ++) {
+             scoreArrayMulti[i] = str(score);
+           }
+           saveStrings("multiFile.txt", scoreArrayMulti);
+         }
        }
        if(player2Scroe > score){
          image(p2Wins, 200, 220);
+         
+         if(player2Scroe > multiData[0]) {
+           for(int i = 0; i < scoreArrayMulti.length; i ++) {
+             scoreArrayMulti[i] = str(player2Scroe);
+           }
+           saveStrings("multiFile.txt", scoreArrayMulti);
+         }
        }
        if(player2Scroe == score){
          image(draw, 320, 220);
        }
        text(score,548,328);
        text(player2Scroe,548,382);
-       text(data[0],548,442);
+       text(multiData[0],548,442);
+       
+       // if statement to check if the players score are higher than the multiplayer score.
        
   
          

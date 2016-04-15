@@ -96,19 +96,21 @@ float player2fuel = 100;
  
  // Files
  int data[];
+ int multiData[];
  
 
 void setup() {
   size(800, 600); 
+  
+  // single player file
   String[] stuff = loadStrings("data.txt");
   data = int(split(stuff[0],','));
   
-  for(int  i = 0; i < data.length; i ++) {
-    println(data[i]);
-  }
-    
-    
-  font = createFont("ARDESTINE.ttf", 63);
+  // multiplayer file
+  String[] multiFile = loadStrings("multiFile.txt");
+  multiData = int(split(multiFile[0],','));
+
+ font = createFont("ARDESTINE.ttf", 63);
   
   // set image variables
   bg = loadImage("images/Background11.png");
