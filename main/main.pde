@@ -7,12 +7,13 @@ Instructions instructions = new Instructions();
 PlayingScreen playing = new PlayingScreen();
 Gameover gOver = new Gameover();
 
-PImage bg, bg2, bg3, bg4, oldPlane, oldPlaneSmall, modernPlane, modernPlaneSmall, spaceShip, spaceShipSmall, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
+PImage bg, bg2, bg3, bg4, bg5, oldPlane, oldPlaneSmall, modernPlane, modernPlaneSmall, spaceShip, spaceShipSmall, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
 multiplayerButton, multiplayerButton2, exitGameButton, exitGameButton2, howToPlayButton, howToPlayButton2,
 backButton, backButton2, tfighter, mPlane, oPlane, instructions4, life, walker, bombSymbol, SpaceShipSmallBlue, SpaceShipBlue, instructions5, oldplaneBlue, oldplanebluesmall, 
 modernplanesmallblue, modernplaneblue , 
 modernplane2, gasoline,goButton,goButton2, bombIcon,oldtank , 
-moderntank ,ww2bullet, score1, leaderboard1, moderncrate , swcrate, swbullet;
+moderntank ,ww2bullet, score1, leaderboard1, p1Score, p2Score, p1Wins, p2Wins, draw ,moderncrate , swcrate, swbullet;
+
 
 PFont font;
 
@@ -88,7 +89,7 @@ float player2fuel = 100;
  ArrayList<EnemyBases> bases = new ArrayList<EnemyBases>();
  ArrayList<Fuel> fuels = new ArrayList<Fuel>();
  ArrayList<Ammo> ammo = new ArrayList<Ammo>();
-  ArrayList<Life> lifePowerUp = new ArrayList<Life>();
+
  
  static boolean[] keys = new boolean[526];
  
@@ -113,6 +114,7 @@ void setup() {
   bg2 = loadImage("images/Background2.png");
   bg3 = loadImage("images/Background3.png");
   bg4 = loadImage("images/Background4.png");
+  bg5 = loadImage("images/Background5.png");
   score1 = loadImage("images/Score.png");
   leaderboard1 = loadImage("images/LeaderBoard.png");
   oldPlane = loadImage("images/oldplane.png");
@@ -147,7 +149,7 @@ void setup() {
   oldplanebluesmall = loadImage("images/oldplanebluesmall.png");
   modernplanesmallblue = loadImage("images/modernplanesmallblue.png");
   modernplaneblue = loadImage("images/modernplaneblue.png");
-  modernplane2 = loadImage("images/modernplane2.png");
+  modernplane2 = loadImage("images/modernplaneblue.png");
   gasoline = loadImage("images/Gasoline_tank.png");
   goButton = loadImage("images/GoButton.png");
   goButton2 = loadImage("images/GoButton2.png");
@@ -158,6 +160,15 @@ void setup() {
   moderncrate  = loadImage("images/moderncrate.png"); 
   swcrate  = loadImage("images/swcrate.png"); 
   swbullet = loadImage("images/swbullet.png");
+
+  
+  p1Score = loadImage("images/P1Score.png");
+  p2Score = loadImage("images/P2Score.png");
+  p1Wins = loadImage("images/P1Wins.png");
+  p2Wins = loadImage("images/P2Wins.png");
+  draw = loadImage("images/Draw.png");
+  
+
    
    for( int i = 0 ; i<1; i++)
    {
@@ -564,11 +575,7 @@ void draw() {
    {
      Fuel fuelss = new Fuel();
      Ammo ammos = new Ammo();
-     Life lifeP = new Life();
-     
-     objects.add(lifeP);
-     lifePowerUp.add(lifeP);
-     
+       
      objects.add(fuelss); 
      fuels.add(fuelss);
      
@@ -617,6 +624,19 @@ void draw() {
   text("X" + numOfBombs,105,33);
   
   if(multip) {
+    
+             // number of lives
+    textSize(15);
+    fill(255,0,0);
+    stroke(255,0,0);
+
+    image(life,230,20);
+    text("X" + player2Lifes,253,33);
+    text("Score: " + player2Scroe,230,53);
+  
+    // number of bombs
+    image(bombSymbol, 280, 20);
+    text("X" + player2numOfBombs,305,33);
     
 
    if(player2fuel < 0) {
@@ -710,18 +730,7 @@ void draw() {
        }
      }
    }
-    // number of lives
-    textSize(15);
-    fill(255,0,0);
-    stroke(255,0,0);
 
-    image(life,230,20);
-    text("X" + player2Lifes,253,33);
-    text("Score: " + player2Scroe,230,53);
-  
-    // number of bombs
-    image(bombSymbol, 280, 20);
-    text("X" + player2numOfBombs,305,33);
   }
   
  // text("Fuel:" + (int)fuel +"%",150,33);
@@ -796,6 +805,8 @@ void backButton() {
           player2mw = false;
           mulltiplayer = false;       
           addObjects = true;
+          multip = false;
+          count = 0;
           optionMenu = true;
         
         }

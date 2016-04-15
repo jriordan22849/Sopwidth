@@ -39,13 +39,13 @@ class Multi {
    stroke(#FF9E00);
    
    // player 2
-   if(player2sw) {
+   if(sw) {
       rect(570, 450, 200,10, 5);
    } 
-   if(player2mw) {
+   if(mw) {
      rect(300, 450, 200,10, 5);
    } 
-   if(player2ww2) {
+   if(ww2) {
      rect(40, 450, 200,10, 5);
    }
  
@@ -64,49 +64,38 @@ class Multi {
       mw = false;
       ww2 = false;
       sw =true;
+      player2mw = false;
+      player2ww2 = false;
+      player2sw =true;
       player1 = true;
+      player2 = true;
     } 
     if( (mouseX >= 300) && (mouseX <= 420) && (mouseY >= 200) && (mouseY <= 270)  )
     {
       sw = false;
       ww2 = false;
       mw = true;
+      player2sw = false;
+      player2ww2 = false;
+      player2mw = true;
       player1 = true;
+      player2 = true;
     } 
     if( (mouseX >= 40) && (mouseX <= 260) && (mouseY >= 200) && (mouseY <= 270)  )
     {
       sw = false;
       mw = false;
       ww2 = true;
-      player1 = true;
-
-    }// end colour change and boolean for first box
-    
-    
-    
-    // Player 2 
-    if( (mouseX >= 570) && (mouseX <= 770) && (mouseY >= 350) && (mouseY <= 420)  )
-    {
-      player2mw = false;
-      player2ww2 = false;
-      player2sw =true;
-      player2 = true;
-    } 
-    if( (mouseX >= 300) && (mouseX <= 420) && (mouseY >= 350) && (mouseY <= 420)  )
-    {
-      player2sw = false;
-      player2ww2 = false;
-      player2mw = true;
-      player2 = true;
-    } 
-    if( (mouseX >= 40) && (mouseX <= 260) && (mouseY >= 350) && (mouseY <= 420)  )
-    {
       player2sw = false;
       player2mw = false;
       player2ww2 = true;
+      player1 = true;
       player2 = true;
 
     }// end colour change and boolean for first box
+    
+
+
     
     
     if(( mouseX >= 415) && (mouseX <= 790) && (mouseY >= 525) && (mouseY <= 580) &&(player1 == true) && (player2 == true)) {
