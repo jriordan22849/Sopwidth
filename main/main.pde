@@ -623,6 +623,19 @@ void draw() {
   
   if(multip) {
     
+             // number of lives
+    textSize(15);
+    fill(255,0,0);
+    stroke(255,0,0);
+
+    image(life,230,20);
+    text("X" + player2Lifes,253,33);
+    text("Score: " + player2Scroe,230,53);
+  
+    // number of bombs
+    image(bombSymbol, 280, 20);
+    text("X" + player2numOfBombs,305,33);
+    
 
    if(player2fuel < 0) {
      player2Control = false;
@@ -715,18 +728,7 @@ void draw() {
        }
      }
    }
-    // number of lives
-    textSize(15);
-    fill(255,0,0);
-    stroke(255,0,0);
 
-    image(life,230,20);
-    text("X" + player2Lifes,253,33);
-    text("Score: " + player2Scroe,230,53);
-  
-    // number of bombs
-    image(bombSymbol, 280, 20);
-    text("X" + player2numOfBombs,305,33);
   }
   
  // text("Fuel:" + (int)fuel +"%",150,33);
@@ -801,6 +803,8 @@ void backButton() {
           player2mw = false;
           mulltiplayer = false;       
           addObjects = true;
+          multip = false;
+          count = 0;
           optionMenu = true;
         
         }
