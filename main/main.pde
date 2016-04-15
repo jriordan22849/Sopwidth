@@ -148,7 +148,7 @@ void setup() {
   oldplanebluesmall = loadImage("images/oldplanebluesmall.png");
   modernplanesmallblue = loadImage("images/modernplanesmallblue.png");
   modernplaneblue = loadImage("images/modernplaneblue.png");
-  modernplane2 = loadImage("images/modernplane2.png");
+  modernplane2 = loadImage("images/modernplaneblue.png");
   gasoline = loadImage("images/Gasoline_tank.png");
   goButton = loadImage("images/GoButton.png");
   goButton2 = loadImage("images/GoButton2.png");
