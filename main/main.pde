@@ -30,6 +30,8 @@ boolean fuelTank = true;
 boolean bool = false;
 boolean bombFire = true;
 
+boolean addObjects = false;
+
 // mulitiplayer
 boolean player1 = false;
 boolean player2 =false;
@@ -65,6 +67,7 @@ int numOfPlanes = 10;
 int numOfBombs = 3;
 int player2numOfBombs = 3;
 
+int count = 0;
 float fuel = 100;
 float player2fuel = 100;
 
@@ -199,11 +202,13 @@ void draw() {
   }
   
   if(singlplayer == true) {
+    
     single.display();
     controls.control();
   }
   
   if(multiplayer == true) {
+    // remvoe all the planes in the array list.
     multi.display();
   }
   
@@ -216,6 +221,30 @@ void draw() {
   }
   
   if(endScreen == true) {
+    for(int i = 0; i < planes.size(); i ++) {
+      planes.remove(i);
+    }
+          
+     // remove bases from the array list.
+     for(int i = 0; i < bases.size(); i ++) {
+       bases.remove(i);
+     }
+     
+     for(int i = 0; i < ammo.size(); i ++) {
+       ammo.remove(i);
+     }
+     
+     for(int i = 0; i < fuels.size(); i ++) {
+       fuels.remove(i);
+     }
+     
+     for(int i = 0;i <objects.size(); i++)//displaying objects
+    {
+
+        objects.remove(i);//removes objects
+      
+    }
+     
     gOver.display();
   }
   
@@ -228,6 +257,50 @@ void draw() {
     background(255);
     stroke(255);
     noFill();
+    
+    if(addObjects) {
+      for(int i = 0; i < numOfPlanes; i ++) {
+        //float x  = random(width, width + 300);
+        //float y = random(50, height - 50);
+    
+        x = (int)random(width, width + 1000);
+        y = (int)random(200,height - 250);
+        EnemyPlane enemy = new EnemyPlane(x,y);
+        planes.add(enemy);
+      }
+  
+      for(int i = 0; i < numOfBases; i ++) {
+        baseX = (int)random(width, width + 500);
+        baseY = 480;
+        EnemyBases base = new EnemyBases(baseX,baseY);
+        bases.add(base);
+      }
+      
+      for( int i = 0 ; i<1; i++)
+      {
+         Background bac = new Background(0,0);
+         objects.add(bac);
+         back.add(bac); 
+      }
+      
+      for( int i = 0 ; i<1; i++)
+      {
+        Background bac = new Background(800,0);
+        objects.add(bac);
+        back.add(bac); 
+      }
+      
+      for( int i = 0 ; i<1; i++)
+      {
+        Player player = new Player(400,300);
+        objects.add(player);
+        players.add(player);
+      }
+  
+      
+
+      addObjects = !addObjects;
+    }
     
     for(int i = 0;i <objects.size(); i++)//displaying objects
     {
@@ -489,14 +562,17 @@ void draw() {
  
  if(mulltiplayer) {
      
-     for( int i = 0 ; i<1; i++)
-     {
+     multip = true;   
+     
+    if(count < 1) {
        Player2 player2 = new Player2(200,300);
        objects.add(player2);
        players2.add(player2);
+       mulltiplayer = false;
+       count++;
     }
-     multip = true;   
-     mulltiplayer = false;
+     
+
  }
  
 
@@ -520,6 +596,12 @@ void draw() {
   text("X" + numOfBombs,105,33);
   
   if(multip) {
+    
+    for(int i = 0; i < players2.size(); i ++) {
+      if(i > 0) {
+        players2.remove(i);
+      }
+    }
     
    // hit detection for ammo 
    for(int i = 0 ; i < players2.size()  ; i ++)//hit detection
@@ -587,10 +669,15 @@ void backButton() {
         if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
         {  
           singlplayer = false;
+          mulltiplayer = false;
           optionMenu = true;
           ww2 = false;
           sw = false;
           mw = false;
+          
+          for(int i = 0; i < players2.size(); i ++) {
+            players2.remove(i);
+          }
         
         }
       }
@@ -634,9 +721,8 @@ void backButton() {
           player2ww2 = false;
           player2sw = false;
           player2mw = false;
-          mulltiplayer = false;
-          
-       
+          mulltiplayer = false;       
+          addObjects = true;
           optionMenu = true;
         
         }
