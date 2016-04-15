@@ -55,6 +55,8 @@ boolean ww2 = false;
 boolean sw = false;
 boolean mw = false;
 
+boolean playerControl = true;
+
 int start;
 int x, y;
 int baseX,baseY;
@@ -360,7 +362,7 @@ void draw() {
         int tempY = 0;
         tempX = plane.x - nextPlane.x;
         tempY = plane.y - nextPlane.y;
-        if( (tempX < 50) && (tempY < 50)) {
+        if( (tempX < 80) && (tempY < 80)) {
           planes.remove(j);
           x = (int)random(width, width + 1000);
           y = (int)random(200,height - 250);
@@ -379,7 +381,7 @@ void draw() {
         EnemyBases cBase = bases.get(j);
         int temp = 0;
         temp = eBase.x - cBase.x;
-        if(temp < 90) {
+        if(temp < 100) {
           bases.remove(j);
           baseX = (int)random(width, width + 800);
           baseY = 480;
@@ -495,6 +497,7 @@ void draw() {
         
         // deduct life from player
         lifes--;
+        fuel = 100;
       } 
       
       if (dist(player.position.x + 50,player.position.y,zombie1.x,zombie1.y) <=20)
@@ -560,6 +563,10 @@ void draw() {
    }
  }
  
+ if(fuel < 0) {
+   playerControl = false;
+ }
+ 
  if(mulltiplayer) {
      
      multip = true;   
@@ -597,11 +604,7 @@ void draw() {
   
   if(multip) {
     
-    for(int i = 0; i < players2.size(); i ++) {
-      if(i > 0) {
-        players2.remove(i);
-      }
-    }
+
     
    // hit detection for ammo 
    for(int i = 0 ; i < players2.size()  ; i ++)//hit detection
@@ -673,12 +676,7 @@ void backButton() {
           optionMenu = true;
           ww2 = false;
           sw = false;
-          mw = false;
-          
-          for(int i = 0; i < players2.size(); i ++) {
-            players2.remove(i);
-          }
-        
+          mw = false;        
         }
       }
       

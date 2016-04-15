@@ -60,6 +60,7 @@ class Player extends GameObjects
    
   void move()
   {
+    if(playerControl == true) {
     
        if(position.x < 0 )//keeps the player in the box
         {
@@ -77,6 +78,7 @@ class Player extends GameObjects
           position.x = 200;
           position.y = 300;
           lifes--;
+          fuel = 100;
         }
       if (checkKey(up))
       {     
@@ -99,6 +101,7 @@ class Player extends GameObjects
           position.sub(forward);
           fuel -= .1; 
       }
+    }
       if (checkKey(fire))
       {
          if(alive == true)// creating a bullet
