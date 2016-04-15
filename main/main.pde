@@ -89,7 +89,13 @@ void setup() {
   size(800, 600); 
   String[] stuff = loadStrings("data.txt");
   data = int(split(stuff[0],','));
-  start = millis();
+  
+  for(int  i = 0; i < data.length; i ++) {
+    println(data[i]);
+  }
+    
+    
+
   
   // set image variables
   bg = loadImage("images/Background11.png");
