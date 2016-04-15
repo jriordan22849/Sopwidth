@@ -5,14 +5,20 @@ class Gameover {
    void display() {
      
      if(!multip) {
-      background(bg); 
+      background(bg4);
       
-      fill(255);
+     image(score1, 155, 270);
+     image(leaderboard1, 162, 350);
+      
+      fill(#9f0017);
       stroke(0);
       
-      textSize(50);
-      text("Score: " + score,300,350);
-      text("Leaderboard: " + data[0],200,400);
+      //textSize(50);
+      //PFont font;
+      //font = createFont("ARDESTINE.ttf", 63);
+      textFont(font);
+      text(score,548,310);
+      text(data[0],548,392);
       
       
       if(score > data[0]) {
@@ -24,7 +30,7 @@ class Gameover {
           saveStrings("data.txt", scoreArray);
       }
      } else { 
-       background(bg); 
+       background(bg4); 
       
        fill(255);
        stroke(0);

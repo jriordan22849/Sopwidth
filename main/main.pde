@@ -7,12 +7,14 @@ Instructions instructions = new Instructions();
 PlayingScreen playing = new PlayingScreen();
 Gameover gOver = new Gameover();
 
-PImage bg, bg2, bg3, oldPlane, oldPlaneSmall, modernPlane, modernPlaneSmall, spaceShip, spaceShipSmall, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
+PImage bg, bg2, bg3, bg4, oldPlane, oldPlaneSmall, modernPlane, modernPlaneSmall, spaceShip, spaceShipSmall, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
 multiplayerButton, multiplayerButton2, exitGameButton, exitGameButton2, howToPlayButton, howToPlayButton2,
 backButton, backButton2, tfighter, mPlane, oPlane, instructions4, life, walker, bombSymbol, SpaceShipSmallBlue, SpaceShipBlue, instructions5, oldplaneBlue, oldplanebluesmall, 
 modernplanesmallblue, modernplaneblue , 
 modernplane2, gasoline,goButton,goButton2, bombIcon,oldtank , 
-moderntank ,ww2bullet;
+moderntank ,ww2bullet, score1, leaderboard1;
+
+PFont font;
 
 
 // screen booleans
@@ -98,12 +100,15 @@ void setup() {
   }
     
     
-
+  font = createFont("ARDESTINE.ttf", 63);
   
   // set image variables
   bg = loadImage("images/Background11.png");
   bg2 = loadImage("images/Background2.png");
   bg3 = loadImage("images/Background3.png");
+  bg4 = loadImage("images/Background4.png");
+  score1 = loadImage("images/Score.png");
+  leaderboard1 = loadImage("images/LeaderBoard.png");
   oldPlane = loadImage("images/oldplane.png");
   oldPlaneSmall = loadImage("images/oldplaneSmall.png");
   modernPlane = loadImage("images/modernplane.png");
