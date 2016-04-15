@@ -30,13 +30,29 @@ class Gameover {
           saveStrings("data.txt", scoreArray);
       }
      } else { 
-       background(bg4); 
+       background(bg5);
+       
+       image(p1Score, 162, 290);
+       image(p2Score, 162, 345);
+       image(leaderboard1, 162, 400);
       
-       fill(255);
+       fill(#9f0017);
        stroke(0);
       
-       textSize(100);
-       text("Score: " + score,200,350);
+       textFont(font);
+       
+       if(score > player2Scroe){
+         image(p1Wins, 200, 220);
+       }
+       if(player2Scroe > score){
+         image(p2Wins, 200, 220);
+       }
+       if(player2Scroe == score){
+         image(draw, 320, 220);
+       }
+       text(score,548,328);
+       text(player2Scroe,548,382);
+       text(data[0],548,442);
        
   
          

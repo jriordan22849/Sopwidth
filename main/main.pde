@@ -7,12 +7,12 @@ Instructions instructions = new Instructions();
 PlayingScreen playing = new PlayingScreen();
 Gameover gOver = new Gameover();
 
-PImage bg, bg2, bg3, bg4, oldPlane, oldPlaneSmall, modernPlane, modernPlaneSmall, spaceShip, spaceShipSmall, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
+PImage bg, bg2, bg3, bg4, bg5, oldPlane, oldPlaneSmall, modernPlane, modernPlaneSmall, spaceShip, spaceShipSmall, playGameButton, playGameButton2, singlePlayerButton, singlePlayerButton2,
 multiplayerButton, multiplayerButton2, exitGameButton, exitGameButton2, howToPlayButton, howToPlayButton2,
 backButton, backButton2, tfighter, mPlane, oPlane, instructions4, life, walker, bombSymbol, SpaceShipSmallBlue, SpaceShipBlue, instructions5, oldplaneBlue, oldplanebluesmall, 
 modernplanesmallblue, modernplaneblue , 
 modernplane2, gasoline,goButton,goButton2, bombIcon,oldtank , 
-moderntank ,ww2bullet, score1, leaderboard1;
+moderntank ,ww2bullet, score1, leaderboard1, p1Score, p2Score, p1Wins, p2Wins, draw;
 
 PFont font;
 
@@ -113,6 +113,7 @@ void setup() {
   bg2 = loadImage("images/Background2.png");
   bg3 = loadImage("images/Background3.png");
   bg4 = loadImage("images/Background4.png");
+  bg5 = loadImage("images/Background5.png");
   score1 = loadImage("images/Score.png");
   leaderboard1 = loadImage("images/LeaderBoard.png");
   oldPlane = loadImage("images/oldplane.png");
@@ -155,6 +156,12 @@ void setup() {
   oldtank = loadImage("images/oldtank.png");
   moderntank = loadImage("images/moderntank.png");
   ww2bullet  = loadImage("images/ww2bullet.png"); 
+  
+  p1Score = loadImage("images/P1Score.png");
+  p2Score = loadImage("images/P2Score.png");
+  p1Wins = loadImage("images/P1Wins.png");
+  p2Wins = loadImage("images/P2Wins.png");
+  draw = loadImage("images/Draw.png");
   
    
    for( int i = 0 ; i<1; i++)
