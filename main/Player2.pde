@@ -1,3 +1,5 @@
+boolean ammoCount2 = true;
+float bombCount = 0;
 class Player2 extends GameObjects
 {
   float buletCounter;
@@ -60,14 +62,22 @@ class Player2 extends GameObjects
    
   void move()
   {
+     if(position.y > 560) {
+       position.x = 200;
+       position.y = 300;
+       player2Lifes--;
+       player2fuel = 100;
+       player2Control = true;
+    }
+    if(player2Control == true) {
     
        if(position.x < 0 )//keeps the player in the box
         {
           position.x = 1;
         }
-        if(position.x > 571)
+        if(position.x > 701)
         {
-          position.x =570;
+          position.x =700;
         }
         
         if(position.y < 0) {
@@ -77,6 +87,7 @@ class Player2 extends GameObjects
           position.x = 200;
           position.y = 300;
           player2Lifes--;
+          player2fuel = 100;
         }
       if (checkKey(up))
       {     
@@ -99,6 +110,7 @@ class Player2 extends GameObjects
           position.sub(forward);
           player2fuel -= .1; 
       }
+    }
       if (checkKey(fire))
       {
          if(alive == true)// creating a bullet
@@ -107,45 +119,51 @@ class Player2 extends GameObjects
               bullet.position = position.get(); //we getting the player position and set the bullet posiotion the same   
               bullet.theta = theta;
               objects.add(bullet);
-              bullets.add(bullet);
-              alive =false;
+              player2bullets.add(bullet);
+              
               buletCounter = 0;
+              alive =false;
              }
            if(alive == false)//fire rate
             {
               buletCounter ++;
-              if(buletCounter == 10 )
+              if(buletCounter == 20 )
               {
                 alive = true;
               }
             }
       }
       
+      if(player2numOfBombs > 0) {
+         ammoCount2 = true; 
+      } else {
+        ammoCount2 = false;
+      }
       if (checkKey(bob))
-      {
-        if(numOfBombs > 0) {
+      {             
+             if(ammoCount2) {
              if(alive == true)// creating a bullet
              { 
                Bomb bomb = new Bomb();
                bomb.position = position.get(); //we getting the player position and set the bullet posiotion the same   
                bomb.theta = 2;
                objects.add(bomb);
-               bombs.add(bomb);
-               alive =false;
-               buletCounter = 0;
+               player2bombs.add(bomb);
+               bombCount = 0;
                bombFire = false;
-               numOfBombs --;
+               player2numOfBombs --;
+               alive =false;
              }
-           }
+           
            if(alive == false)//fire rate
            {
-             buletCounter ++;
-             if(buletCounter == 10 )
+             bombCount ++;
+             if(bombCount == 20)
              {
                alive = true;
              }
            }
-     
+         }
       }
         
       forward.x = 5;
@@ -155,7 +173,6 @@ class Player2 extends GameObjects
       position.add(velocity); 
       
     }
-    
   void explosion()//when bullet hits the zombie it creates mini explosion
   {
 

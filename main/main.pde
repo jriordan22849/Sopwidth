@@ -57,6 +57,9 @@ boolean ww2 = false;
 boolean sw = false;
 boolean mw = false;
 
+boolean playerControl = true;
+boolean player2Control = true;
+
 int start;
 int x, y;
 int baseX,baseY;
@@ -75,7 +78,9 @@ float player2fuel = 100;
 
  ArrayList<GameObjects> objects = new ArrayList<GameObjects>();
  ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+ ArrayList<Bullet> player2bullets = new ArrayList<Bullet>();
  ArrayList<Bomb> bombs = new ArrayList<Bomb>();
+ ArrayList<Bomb> player2bombs = new ArrayList<Bomb>();
  ArrayList<Player> players = new ArrayList<Player>();
  ArrayList<Player2> players2 = new ArrayList<Player2>();
  ArrayList<Background> back = new ArrayList<Background>();
@@ -83,6 +88,7 @@ float player2fuel = 100;
  ArrayList<EnemyBases> bases = new ArrayList<EnemyBases>();
  ArrayList<Fuel> fuels = new ArrayList<Fuel>();
  ArrayList<Ammo> ammo = new ArrayList<Ammo>();
+  ArrayList<Life> lifePowerUp = new ArrayList<Life>();
  
  static boolean[] keys = new boolean[526];
  
@@ -149,7 +155,6 @@ void setup() {
   oldtank = loadImage("images/oldtank.png");
   moderntank = loadImage("images/moderntank.png");
   ww2bullet  = loadImage("images/ww2bullet.png"); 
-
   
    
    for( int i = 0 ; i<1; i++)
@@ -325,7 +330,6 @@ void draw() {
     }
     
 
-    
     for(int i = 0; i < planes.size(); i ++) {
       planes.get(i).display();
        
@@ -365,7 +369,7 @@ void draw() {
         int tempY = 0;
         tempX = plane.x - nextPlane.x;
         tempY = plane.y - nextPlane.y;
-        if( (tempX < 50) && (tempY < 50)) {
+        if( (tempX < 80) && (tempY < 80)) {
           planes.remove(j);
           x = (int)random(width, width + 1000);
           y = (int)random(200,height - 250);
@@ -384,7 +388,7 @@ void draw() {
         EnemyBases cBase = bases.get(j);
         int temp = 0;
         temp = eBase.x - cBase.x;
-        if(temp < 90) {
+        if(temp < 100) {
           bases.remove(j);
           baseX = (int)random(width, width + 800);
           baseY = 480;
@@ -500,6 +504,7 @@ void draw() {
         
         // deduct life from player
         lifes--;
+        fuel = 100;
       } 
       
       if (dist(player.position.x + 50,player.position.y,zombie1.x,zombie1.y) <=20)
@@ -557,12 +562,21 @@ void draw() {
    {
      Fuel fuelss = new Fuel();
      Ammo ammos = new Ammo();
+     Life lifeP = new Life();
+     
+     objects.add(lifeP);
+     lifePowerUp.add(lifeP);
+     
      objects.add(fuelss); 
      fuels.add(fuelss);
      
      objects.add(ammos); 
      ammo.add(ammos);
    }
+ }
+ 
+ if(fuel < 0) {
+   playerControl = false;
  }
  
  if(mulltiplayer) {
@@ -582,7 +596,7 @@ void draw() {
  
 
  
- if(lifes <= 0) {
+ if(lifes <= 0 || player2Lifes <= 0) {
    playScreen = !playScreen;
    endScreen = true;
  }
@@ -602,13 +616,11 @@ void draw() {
   
   if(multip) {
     
-    for(int i = 0; i < players2.size(); i ++) {
-      if(i > 0) {
-        players2.remove(i);
-      }
-    }
-    
-   // hit detection for ammo 
+
+   if(player2fuel < 0) {
+     player2Control = false;
+   }
+   // hit detection for ammo  for player 2
    for(int i = 0 ; i < players2.size()  ; i ++)//hit detection
   {
     Player2 player = players2.get(i);
@@ -623,7 +635,7 @@ void draw() {
     }
   }
   
-  // hit detection for fuel
+  // hit detection for fuel for player 2
   for(int i = 0 ; i < players2.size()  ; i ++)//hit detection
   {
     Player2 player = players2.get(i);
@@ -637,6 +649,65 @@ void draw() {
       } 
     }
   }
+  
+  
+  // arraylist for bulley and plane for player 2.
+   for(int i = 0 ; i < player2bullets.size()  ; i ++)//hit detection
+  {
+    Bullet bullet = player2bullets.get(i);
+   // println(bullet.position.x);
+    for (int j = 0; j < planes.size() ; j ++)
+    {
+      EnemyPlane enemy1 = planes.get(j);
+      if (dist(bullet.position.x ,bullet.position.y,enemy1.x -20 ,enemy1.y -10 ) <=15)
+      {
+        bullet.explosion();
+        bullet.touched();
+        planes.remove(j);
+        x = (int)random(width, width + 500);
+        y = (int)random(60,height - 200);
+        EnemyPlane enemy = new EnemyPlane(x,y);
+        planes.add(enemy);
+        player2Scroe ++;
+      } 
+    }
+  }
+  
+   // bomb detection
+   for(int i = 0; i < player2bombs.size();i ++) {
+     Bomb bomb = player2bombs.get(i);
+     for(int j = 0 ; j < bases.size(); j ++) {
+       EnemyBases eBase = bases.get(j);
+       if(dist(bomb.position.x, bomb.position.y,eBase.x,eBase.y + 100)  <= 100) {
+         eBase.explosion(eBase.x,eBase.y);
+         bomb.explosion();
+         bomb.touched();
+         bases.remove(j);
+         
+         baseX = (int)random(width, width + 500);
+         baseY = 480;
+         EnemyBases base = new EnemyBases(baseX,baseY);
+         bases.add(base);
+        
+         player2Scroe += 2;
+       }
+   
+       if(dist(bomb.position.x, bomb.position.y,eBase.x - 50,eBase.y + 100) <= 100) {
+         eBase.explosion(eBase.x,eBase.y);
+         bomb.explosion();
+         bomb.touched();
+         bases.remove(j);
+         
+         baseX = (int)random(width, width + 500);
+         baseY = 480;
+         EnemyBases base = new EnemyBases(baseX,baseY);
+         bases.add(base);
+         
+
+         player2Scroe += 2;
+       }
+     }
+   }
     // number of lives
     textSize(15);
     fill(255,0,0);
@@ -678,12 +749,7 @@ void backButton() {
           optionMenu = true;
           ww2 = false;
           sw = false;
-          mw = false;
-          
-          for(int i = 0; i < players2.size(); i ++) {
-            players2.remove(i);
-          }
-        
+          mw = false;        
         }
       }
       
