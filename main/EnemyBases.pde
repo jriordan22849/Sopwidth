@@ -13,6 +13,7 @@ class EnemyBases {
     } else if(mw) {
       image(moderntank, x -= 2,y+50);  
     } else if(ww2) {
+      rect(x -= 2,y+54,10,10);
       image(oldtank, x -= 2,y+54);
     }
     

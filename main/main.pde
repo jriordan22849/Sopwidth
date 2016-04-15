@@ -12,7 +12,8 @@ multiplayerButton, multiplayerButton2, exitGameButton, exitGameButton2, howToPla
 backButton, backButton2, tfighter, mPlane, oPlane, instructions4, life, walker, bombSymbol, SpaceShipSmallBlue, SpaceShipBlue, instructions5, oldplaneBlue, oldplanebluesmall, 
 modernplanesmallblue, modernplaneblue , 
 modernplane2, gasoline,goButton,goButton2, bombIcon,oldtank , 
-moderntank ,ww2bullet, score1, leaderboard1, p1Score, p2Score, p1Wins, p2Wins, draw ,moderncrate , swcrate, swbullet;
+moderntank ,ww2bullet, score1, leaderboard1, p1Score, p2Score, p1Wins, p2Wins, draw ,moderncrate , swcrate, swbullet,
+swbomb,wwbomb;
 
 
 PFont font;
@@ -70,7 +71,7 @@ int score = 0;
 int player2Scroe = 0;
 int numOfBases = 6;
 int numOfPlanes = 10;
-int numOfBombs = 3;
+int numOfBombs = 100;
 int player2numOfBombs = 3;
 
 int count = 0;
@@ -160,6 +161,8 @@ void setup() {
   moderncrate  = loadImage("images/moderncrate.png"); 
   swcrate  = loadImage("images/swcrate.png"); 
   swbullet = loadImage("images/swbullet.png");
+  swbomb = loadImage("images/swbullet.png");
+  wwbomb =loadImage("images/ww2bomb.png");
 
   
   p1Score = loadImage("images/P1Score.png");
@@ -417,7 +420,7 @@ void draw() {
      Bomb bomb = bombs.get(i);
      for(int j = 0 ; j < bases.size(); j ++) {
        EnemyBases eBase = bases.get(j);
-       if(dist(bomb.position.x, bomb.position.y,eBase.x,eBase.y + 100)  <= 100) {
+       if(dist(bomb.position.x + 25, bomb.position.y +59, eBase.x,eBase.y + 100)  <= 100) {
          eBase.explosion(eBase.x,eBase.y);
          bomb.explosion();
          bomb.touched();

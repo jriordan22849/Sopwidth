@@ -34,8 +34,19 @@ class Bomb extends GameObjects
     pushMatrix();
     noStroke();
     translate(position.x + 100,position.y);
-    fill(255,0,0);
-    ellipse(45,55,15, 5);
+     if(ww2 == true)
+     {  
+       rect(0,30,10,10);
+       image(wwbomb,0,30);
+     }
+     if(sw == true)
+     {
+       image(swbullet, 10, 30);
+     }
+     if(mw == true)
+     {
+       image(ww2bullet,20, 20);
+     }
     popMatrix();
   }
   
