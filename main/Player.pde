@@ -1,6 +1,8 @@
+boolean ammoCount;
 class Player extends GameObjects
 {
   float buletCounter;
+  float bombCounter;
   boolean alive = true;
   float duel;
   float maxduel =100;
@@ -60,6 +62,13 @@ class Player extends GameObjects
    
   void move()
   {
+     if(position.y > 560) {
+       position.x = 200;
+       position.y = 300;
+       lifes--;
+       fuel = 100;
+       playerControl = true;
+    }
     if(playerControl == true) {
     
        if(position.x < 0 )//keeps the player in the box
@@ -111,8 +120,9 @@ class Player extends GameObjects
               bullet.theta = theta;
               objects.add(bullet);
               bullets.add(bullet);
-              alive =false;
+              
               buletCounter = 0;
+              alive =false;
              }
            if(alive == false)//fire rate
             {
@@ -124,9 +134,14 @@ class Player extends GameObjects
             }
       }
       
+      if(numOfBombs > 0) {
+         ammoCount = true; 
+      } else {
+        ammoCount = false;
+      }
       if (checkKey(bob))
-      {
-        if(numOfBombs > 0) {
+      {             
+             if(ammoCount) {
              if(alive == true)// creating a bullet
              { 
                Bomb bomb = new Bomb();
@@ -134,21 +149,21 @@ class Player extends GameObjects
                bomb.theta = 2;
                objects.add(bomb);
                bombs.add(bomb);
-               alive =false;
-               buletCounter = 0;
+               bombCounter = 0;
                bombFire = false;
                numOfBombs --;
+               alive =false;
              }
-           }
+           
            if(alive == false)//fire rate
            {
-             buletCounter ++;
-             if(buletCounter == 10 )
+             bombCounter ++;
+             if(bombCounter == 20)
              {
                alive = true;
              }
            }
-     
+             }
       }
         
       forward.x = 5;
