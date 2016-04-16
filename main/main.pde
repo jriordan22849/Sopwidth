@@ -734,7 +734,7 @@ void draw() {
 // Back button in the menu
 void backButton() {
   
-  image(backButton, 10, 525);
+  //image(backButton, 10, 525);
   if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
   {  
     image(backButton2, 10, 520);

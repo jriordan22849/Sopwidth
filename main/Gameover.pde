@@ -7,6 +7,7 @@ class Gameover {
      
      if(!multip) {
       background(bg4);
+      image(backButton, 10, 525); 
       
      image(score1, 155, 270);
      image(leaderboard1, 162, 350);
@@ -34,13 +35,14 @@ class Gameover {
           }
           saveStrings("data.txt", scoreArray);
       }
+      backButton();
      } else { 
        
        // reload multiplayer file incase it updated 
        String[] multiFile = loadStrings("multiFile.txt");
        multiData = int(split(multiFile[0],','));
        background(bg5);
-       
+       image(backButton, 10, 525); 
        image(p1Score, 162, 290);
        image(p2Score, 162, 345);
        image(leaderboard1, 162, 400);
@@ -80,13 +82,9 @@ class Gameover {
        
        // if statement to check if the players score are higher than the multiplayer score.
        
-  
-         
-         
+         backButton();
        
      }
-       
-
-      backButton();
+     
    }
 }
