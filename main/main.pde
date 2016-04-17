@@ -1,3 +1,7 @@
+// import music library
+import processing.sound.*;
+SoundFile file;
+
 MainMenu main = new MainMenu();
 Option option = new Option();
 Single single = new Single();
@@ -65,13 +69,13 @@ boolean player2Control = true;
 int start;
 int x, y;
 int baseX,baseY;
-int lifes = 2;
-int player2Lifes = 2;
+int lifes = 5;
+int player2Lifes = 5;
 int score = 0;
 int player2Scroe = 0;
 int numOfBases = 6;
 int numOfPlanes = 10;
-int numOfBombs = 100;
+int numOfBombs = 3;
 int player2numOfBombs = 3;
 
 int count = 0;
@@ -102,12 +106,16 @@ float player2fuel = 100;
 void setup() {
   size(800, 600); 
   
+  // load sound file
+  
+
+  
   // single player file
-  String[] stuff = loadStrings("data.txt");
+  String[] stuff = loadStrings("LeaderBoard/data.txt");
   data = int(split(stuff[0],','));
   
   // multiplayer file
-  String[] multiFile = loadStrings("multiFile.txt");
+  String[] multiFile = loadStrings("LeaderBoard/multiFile.txt");
   multiData = int(split(multiFile[0],','));
 
  font = createFont("ARDESTINE.ttf", 63);
@@ -325,9 +333,6 @@ void draw() {
         objects.add(player);
         players.add(player);
       }
-  
-      
-
       addObjects = !addObjects;
     }
     
@@ -596,7 +601,7 @@ void draw() {
  
 
  
- if(lifes <= 0 || player2Lifes <= 0) {
+ if(lifes <= 0 && !multip) {
    playScreen = !playScreen;
    endScreen = true;
  }
@@ -616,7 +621,14 @@ void draw() {
   
   if(multip) {
     
-             // number of lives
+
+   if(lifes <= 0 && player2Lifes <= 0) {
+     playScreen = !playScreen;
+     endScreen = true;
+   }
+    
+    
+    // Player 2 details to be displayed
     textSize(15);
     fill(255,0,0);
     stroke(255,0,0);
@@ -770,8 +782,7 @@ void backButton() {
         if( ( mouseX >= 10) && (mouseX <= 225) && (mouseY >= 520) && (mouseY <= 580) )
         {  
           multiplayer = false;
-          optionMenu = true;
-        
+          optionMenu = true; 
         }
       }
       
@@ -780,8 +791,8 @@ void backButton() {
         {  
           score = 0;
           player2Scroe = 0;
-          lifes = 3;
-          player2Lifes = 3;
+          lifes = 5;
+          player2Lifes = 5;
           fuel = 100;
           player2fuel = 100;
           numOfBombs = 3;

@@ -19,7 +19,7 @@ class Gameover {
       //font = createFont("ARDESTINE.ttf", 63);
       
       // reload single player leaderboard incase it updated
-      String[] stuff = loadStrings("data.txt");
+      String[] stuff = loadStrings("LeaderBoard/data.txt");
       data = int(split(stuff[0],','));
       textFont(font);
       text(score,548,310);
@@ -37,7 +37,7 @@ class Gameover {
      } else { 
        
        // reload multiplayer file incase it updated 
-       String[] multiFile = loadStrings("multiFile.txt");
+       String[] multiFile = loadStrings("LeaderBoard/multiFile.txt");
        multiData = int(split(multiFile[0],','));
        background(bg5);
        
@@ -58,7 +58,7 @@ class Gameover {
            for(int i = 0; i < scoreArrayMulti.length; i ++) {
              scoreArrayMulti[i] = str(score);
            }
-           saveStrings("multiFile.txt", scoreArrayMulti);
+           saveStrings("LeaderBoard/multiFile.txt", scoreArrayMulti);
          }
        }
        if(player2Scroe > score){
@@ -68,7 +68,7 @@ class Gameover {
            for(int i = 0; i < scoreArrayMulti.length; i ++) {
              scoreArrayMulti[i] = str(player2Scroe);
            }
-           saveStrings("multiFile.txt", scoreArrayMulti);
+           saveStrings("LeaderBoard/multiFile.txt", scoreArrayMulti);
          }
        }
        if(player2Scroe == score){

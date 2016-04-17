@@ -33,6 +33,7 @@ class Player2 extends GameObjects
 
   void display()
   {  
+     if(player2Lifes > 0) {
      pushMatrix();
      float healthPercentage;
      healthPercentage = player2fuel/maxduel*100;
@@ -58,10 +59,12 @@ class Player2 extends GameObjects
 
      
      popMatrix();
+     }
    }
    
   void move()
   {
+    if(player2Lifes > 0) {
      if(position.y > 560) {
        position.x = 200;
        position.y = 300;
@@ -171,6 +174,7 @@ class Player2 extends GameObjects
       down2.y = 7;
       velocity.y = 2;
       position.add(velocity); 
+  }
       
     }
   void explosion()//when bullet hits the zombie it creates mini explosion
