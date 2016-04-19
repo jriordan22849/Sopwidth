@@ -171,7 +171,7 @@ class Player extends GameObjects
       forward.x = 5;
       down.y = 5;
       down2.y = 7;
-      velocity.y = 0;
+      velocity.y = 2;
       position.add(velocity); 
     }
     }
