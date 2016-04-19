@@ -466,6 +466,7 @@ void draw() {
       if (dist(bomb.position.x,bomb.position.y,zombie1.x,zombie1.y) <=80)
       {
         bomb.explosion();
+        bomb.touched();
         bombs.remove(i);
         planes.remove(j);
         
@@ -726,6 +727,7 @@ void draw() {
         // remove plane
         planes.remove(j);
         
+        
         // add new plane to the list and spawn it
         x = (int)random(width, width + 500);
         y = (int)random(60,height - 200);
@@ -826,6 +828,35 @@ void draw() {
        }
      }
    }
+   
+      // bomb for plane
+   for(int i = 0 ; i < player2bombs.size()  ; i ++)//hit detection
+  {
+    Bomb bomb = player2bombs.get(i);
+   // println(bullet.position.x);
+    for (int j = 0; j < planes.size() ; j ++)
+    {
+      EnemyPlane zombie1 = planes.get(j);
+      if (dist(bomb.position.x,bomb.position.y,zombie1.x,zombie1.y) <=80)
+      {
+        bomb.explosion();
+        bomb.touched();
+        player2bombs.remove(i);
+        planes.remove(j);
+        
+        // spawn a new plane 
+        x = (int)random(width, width + 500);
+        y = (int)random(60,height - 200);
+        EnemyPlane enemy = new EnemyPlane(x,y);
+        planes.add(enemy);
+        player2Scroe ++;
+        bombHitPlayer = bombHit.loadFile("Sound/Explosion.wav");
+        bombHitPlayer.play();
+      } 
+      
+
+    }
+  }
 
   }
   
