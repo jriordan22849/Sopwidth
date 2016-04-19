@@ -1,6 +1,9 @@
+
 // import music library
-import processing.sound.*;
-SoundFile file;
+import ddf.minim.*;
+
+Minim minim;
+AudioPlayer player;
 
 MainMenu main = new MainMenu();
 Option option = new Option();
@@ -107,6 +110,8 @@ void setup() {
   size(800, 600); 
   
   // load sound file
+  minim = new Minim(this);
+
   
 
   
