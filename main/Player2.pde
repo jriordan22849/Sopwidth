@@ -125,6 +125,8 @@ class Player2 extends GameObjects
               player2bullets.add(bullet);
               
               buletCounter = 0;
+              player = minim.loadFile("Sound/bullet.wav");
+              player.play();
               alive =false;
              }
            if(alive == false)//fire rate

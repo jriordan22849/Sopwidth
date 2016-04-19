@@ -26,6 +26,9 @@ class Gameover {
       text(score,548,310);
       text(data[0],548,392);
       
+      println("File" +data[0]);
+      println(multip);
+      println("Score: " + score);
       
       if(score > data[0]) {
           String scoreString = str(score);
@@ -33,7 +36,7 @@ class Gameover {
           for(int i = 0; i < scoreArray.length; i ++) {
             scoreArray[i] = scoreString;
           }
-          saveStrings("data.txt", scoreArray);
+          saveStrings("LeaderBoard/data.txt", scoreArray);
       }
       backButton();
      } else { 

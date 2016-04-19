@@ -2,8 +2,8 @@
 // import music library
 import ddf.minim.*;
 
-Minim minim;
-AudioPlayer player;
+Minim minim, soundHit, bombHit, powerUpHit, backgroundMusic;
+AudioPlayer player, soundHitPlayer,bombHitPlayer, powerUpHitPlayer, backgroundMusicPlayer;
 
 MainMenu main = new MainMenu();
 Option option = new Option();
@@ -78,7 +78,7 @@ int score = 0;
 int player2Scroe = 0;
 int numOfBases = 6;
 int numOfPlanes = 10;
-int numOfBombs = 3;
+int numOfBombs = 100;
 int player2numOfBombs = 3;
 
 int count = 0;
@@ -111,10 +111,14 @@ void setup() {
   
   // load sound file
   minim = new Minim(this);
-
+  soundHit = new Minim(this);
+  bombHit = new Minim(this);
+  powerUpHit = new Minim(this);
+  backgroundMusic = new Minim(this);
   
-
-  
+  backgroundMusicPlayer = backgroundMusic.loadFile("Sound/Phutureprimitive - Kinetik.mp3");
+  backgroundMusicPlayer.loop();
+ 
   // single player file
   String[] stuff = loadStrings("LeaderBoard/data.txt");
   data = int(split(stuff[0],','));
@@ -445,6 +449,8 @@ void draw() {
          bases.add(base);
         
          score += 2;
+         bombHitPlayer = bombHit.loadFile("Sound/Explosion.wav");
+         bombHitPlayer.play();
        }
      }
    }
@@ -457,7 +463,7 @@ void draw() {
     for (int j = 0; j < planes.size() ; j ++)
     {
       EnemyPlane zombie1 = planes.get(j);
-      if (dist(bomb.position.x,bomb.position.y,zombie1.x,zombie1.y) <=50)
+      if (dist(bomb.position.x,bomb.position.y,zombie1.x,zombie1.y) <=80)
       {
         bomb.explosion();
         bombs.remove(i);
@@ -469,6 +475,8 @@ void draw() {
         EnemyPlane enemy = new EnemyPlane(x,y);
         planes.add(enemy);
         score ++;
+        bombHitPlayer = bombHit.loadFile("Sound/Explosion.wav");
+        bombHitPlayer.play();
       } 
       
 
@@ -492,11 +500,13 @@ void draw() {
         EnemyPlane enemy = new EnemyPlane(x,y);
         planes.add(enemy);
         score ++;
+        soundHitPlayer = soundHit.loadFile("Sound/Hit_Hurt17.wav");
+        soundHitPlayer.play();
       } 
     }
   }
   
-  // hit detection of planes
+  // hit detection of plane 1
   
   for(int i = 0; i < players.size(); i ++) {
     Player player = players.get(i);
@@ -519,6 +529,8 @@ void draw() {
         // deduct life from player
         lifes--;
         fuel = 100;
+        soundHitPlayer = soundHit.loadFile("Sound/Hit_Hurt17.wav");
+        soundHitPlayer.play();
       } 
       
       if (dist(player.position.x + 50,player.position.y,zombie1.x,zombie1.y) <=20)
@@ -536,6 +548,9 @@ void draw() {
         
         // deduct life from player
         lifes--;
+        fuel = 100;
+        soundHitPlayer = soundHit.loadFile("Sound/Hit_Hurt17.wav");
+        soundHitPlayer.play();
       } 
     }
   }
@@ -551,6 +566,9 @@ void draw() {
       {
         numOfBombs += 1 ;
         ammolevel.touched();
+        powerUpHitPlayer = powerUpHit.loadFile("Sound/Powerup.wav");
+        powerUpHitPlayer.play();
+
       } 
     }
   }
@@ -566,6 +584,8 @@ void draw() {
       {
         fuel = 100 ;
         health.touched();
+        powerUpHitPlayer = powerUpHit.loadFile("Sound/Powerup.wav");
+        powerUpHitPlayer.play();
       } 
     }
   }
@@ -615,6 +635,10 @@ void draw() {
   textSize(15);
   fill(255,0,0);
   stroke(255,0,0);
+  
+  if(lifes < 0) {
+    lifes = 0;
+  }
 
   image(life,30,20);
   text("X" + lifes,53,33);
@@ -637,6 +661,10 @@ void draw() {
     textSize(15);
     fill(255,0,0);
     stroke(255,0,0);
+    
+    if(player2Lifes < 0) {
+      player2Lifes = 0;
+    }
 
     image(life,230,20);
     text("X" + player2Lifes,253,33);
@@ -661,6 +689,8 @@ void draw() {
       {
         player2numOfBombs += 1 ;
         ammolevel.touched();
+        powerUpHitPlayer = powerUpHit.loadFile("Sound/Powerup.wav");
+        powerUpHitPlayer.play();
       } 
     }
   }
@@ -676,12 +706,63 @@ void draw() {
       {
         player2fuel = 100 ;
         health.touched();
+        powerUpHitPlayer = powerUpHit.loadFile("Sound/Powerup.wav");
+        powerUpHitPlayer.play();
+      } 
+    }
+  }
+  
+    // hit detection of plane 2
+  
+  for(int i = 0; i < players2.size(); i ++) {
+    Player2 player = players2.get(i);
+    for (int j = 0; j < planes.size() ; j ++)
+    {
+      EnemyPlane zombie1 = planes.get(j);
+      if (dist(player.position.x,player.position.y,zombie1.x,zombie1.y) <=20)
+      {
+        player.explosion();
+        
+        // remove plane
+        planes.remove(j);
+        
+        // add new plane to the list and spawn it
+        x = (int)random(width, width + 500);
+        y = (int)random(60,height - 200);
+        EnemyPlane enemy = new EnemyPlane(x,y);
+        planes.add(enemy);
+        
+        // deduct life from player
+        player2Lifes--;
+        player2fuel = 100;
+        soundHitPlayer = soundHit.loadFile("Sound/Hit_Hurt17.wav");
+        soundHitPlayer.play();
+      } 
+      
+      if (dist(player.position.x + 50,player.position.y,zombie1.x,zombie1.y) <=20)
+      {
+        player.explosion();
+        
+        // remove plane
+        planes.remove(j);
+        
+        // add new plane to the list and spawn it
+        x = (int)random(width, width + 500);
+        y = (int)random(60,height - 200);
+        EnemyPlane enemy = new EnemyPlane(x,y);
+        planes.add(enemy);
+        
+        // deduct life from player
+        player2Lifes--;
+        player2fuel = 100;
+        soundHitPlayer = soundHit.loadFile("Sound/Hit_Hurt17.wav");
+        soundHitPlayer.play();
       } 
     }
   }
   
   
-  // arraylist for bulley and plane for player 2.
+  // arraylist for bullet and plane for player 2.
    for(int i = 0 ; i < player2bullets.size()  ; i ++)//hit detection
   {
     Bullet bullet = player2bullets.get(i);
@@ -699,6 +780,9 @@ void draw() {
         EnemyPlane enemy = new EnemyPlane(x,y);
         planes.add(enemy);
         player2Scroe ++;
+        
+        soundHitPlayer = soundHit.loadFile("Sound/Hit_Hurt17.wav");
+        soundHitPlayer.play();
       } 
     }
   }
@@ -720,6 +804,8 @@ void draw() {
          bases.add(base);
         
          player2Scroe += 2;
+         bombHitPlayer = bombHit.loadFile("Sound/Explosion.wav");
+         bombHitPlayer.play();
        }
    
        if(dist(bomb.position.x, bomb.position.y,eBase.x - 50,eBase.y + 100) <= 100) {
@@ -735,6 +821,8 @@ void draw() {
          
 
          player2Scroe += 2;
+         bombHitPlayer = bombHit.loadFile("Sound/Explosion.wav");
+         bombHitPlayer.play();
        }
      }
    }
