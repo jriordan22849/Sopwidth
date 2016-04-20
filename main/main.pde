@@ -9,7 +9,7 @@ MainMenu main = new MainMenu();
 Option option = new Option();
 Single single = new Single();
 Multi multi = new Multi();
-Controls controls = new Controls();
+
 Instructions instructions = new Instructions();
 PlayingScreen playing = new PlayingScreen();
 Gameover gOver = new Gameover();
@@ -78,7 +78,7 @@ int score = 0;
 int player2Scroe = 0;
 int numOfBases = 6;
 int numOfPlanes = 10;
-int numOfBombs = 100;
+int numOfBombs = 5;
 int player2numOfBombs = 3;
 
 int count = 0;
@@ -250,7 +250,7 @@ void draw() {
   if(singlplayer == true) {
     
     single.display();
-    controls.control();
+
   }
   
   if(multiplayer == true) {
